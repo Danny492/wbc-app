@@ -1,0 +1,112 @@
+<!-- @if (playerDetail) { -->
+<div class="container py-5">
+
+  <a [routerLink]="['']" class="btn btn-outline-secondary rounded-pill mb-4 px-4 fw-bold">
+    <i class="bi bi-arrow-left me-2"></i> Volver
+  </a>
+
+  <div class="card border-0 shadow-lg overflow-hidden rounded-5">
+    <div class="row g-0">
+
+      <div class="col-lg-5 position-relative bg-light-gradient p-0 overflow-hidden hero-container">
+        @if(playerDetail?.imageUrl){
+        <img [ngSrc]="playerDetail?.imageUrl || 'assets/tatis.png'"
+          fill
+          priority
+          class="img-fluid position-relative z-1 w-100 h-100 object-fit-cover hero-image"
+          style="object-position: top center"
+          alt="{{ playerDetail?.name }}"
+        >
+        }
+        <div class="gradient-overlay z-2"></div>
+
+        <div class="hero-bg-text position-absolute bottom-0 start-50 translate-middle-x fw-bold text-nowrap">
+          {{ playerDetail?.number }}
+        </div>
+      </div>
+
+      <div class="col-lg-7 bg-white p-4 p-md-5">
+
+        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-4">
+
+            <div>
+                <div class="d-flex align-items-center mb-2">
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2">
+                        {{ playerDetail?.position }}
+                    </span>
+                    <span class="text-muted fw-bold tracking-wide ms-2">MLB PLAYER</span>
+                </div>
+
+                <h1 class="display-4 fw-bolder mb-1 text-dark" style="line-height: 1;">
+                    {{ playerDetail?.name | uppercase }}
+                    <span class="text-primary">{{ playerDetail?.lastName | uppercase }}</span>
+                </h1>
+
+                <p class="text-muted fs-5 mb-0">
+                    {{ playerDetail?.currentTeam?.name || 'Free Agent' }}
+                </p>
+            </div>
+
+            @if(playerDetail?.currentTeam?.id){
+                          <div class="ms-3">
+                <img [src]="'https://www.mlbstatic.com/team-logos/' + playerDetail?.currentTeam?.id + '.svg'"
+                     alt="Team Logo"
+                     width="100"
+                     height="100"
+                     class="object-fit-contain">
+            </div>
+            }
+
+        </div>
+
+        <div class="row g-3 mb-5">
+          <div class="col-6 col-sm-3">
+            <div class="p-3 bg-light rounded-4 h-100 border border-light-subtle">
+              <small class="text-muted text-uppercase d-block mb-1" style="font-size: 0.7rem">Age</small>
+              <span class="fw-bold fs-5">{{ playerDetail?.currentAge }}</span>
+            </div>
+          </div>
+          <div class="col-6 col-sm-3">
+            <div class="p-3 bg-light rounded-4 h-100 border border-light-subtle">
+              <small class="text-muted text-uppercase d-block mb-1" style="font-size: 0.7rem">Height</small>
+              <span class="fw-bold fs-5">{{ playerDetail?.height }}</span>
+            </div>
+          </div>
+          <div class="col-6 col-sm-3">
+            <div class="p-3 bg-light rounded-4 h-100 border border-light-subtle">
+              <small class="text-muted text-uppercase d-block mb-1" style="font-size: 0.7rem">Weight</small>
+              <span class="fw-bold fs-5">{{ playerDetail?.weight }} lb</span>
+            </div>
+          </div>
+          <div class="col-6 col-sm-3">
+            <div class="p-3 bg-light rounded-4 h-100 border border-light-subtle">
+              <small class="text-muted text-uppercase d-block mb-1" style="font-size: 0.7rem">B/T</small>
+              <span class="fw-bold fs-5">{{ playerDetail?.batSide?.code }}/{{ playerDetail?.pitchHand?.code }}</span>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="fw-bold mb-3 border-bottom pb-2">Biography</h4>
+        <p class="text-secondary lh-lg">
+          {{
+            playerDetail?.bio ||
+              'Professional baseball player active in Major League Baseball. Born in ' +
+                playerDetail?.birthCity +
+                ', ' +
+                playerDetail?.birthCountry +
+                '.'
+          }}
+        </p>
+
+        <div class="mt-4 p-3 rounded-3 bg-primary-subtle d-inline-block">
+          <span class="text-primary fw-bold">
+            <i class="bi bi-calendar-event me-2"></i> Debut:
+            {{ playerDetail?.mlbDebutDate | date: 'longDate' }}
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- } -->

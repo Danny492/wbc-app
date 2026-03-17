@@ -1,0 +1,31 @@
+<div class="card h-100 border-0 shadow rounded-4 overflow-hidden card-hover">
+
+  <div class="position-relative d-flex justify-content-center align-items-end bg-body-tertiary overflow-hidden rounded-top-4"
+     style="height: 220px;">
+
+  <img [ngSrc]="playerDetail?.imageUrl || 'assets/tatis.png'"
+       fill
+       [priority]="isPriority"
+       class="object-fit-contain w-100 h-100 p-2"
+       alt="{{ playerDetail?.name }}">
+
+  <div class="overlay"></div>
+</div>
+
+  <div class="card-body p-4 d-flex flex-column">
+    <h5 class="card-title fw-bold mb-1 text-dark" style="min-height: 3.5rem;">
+      {{ playerDetail?.name | uppercase }} {{ playerDetail?.lastName | uppercase }}
+    </h5>
+    <div class="d-flex align-items-center mb-3">
+      <span class="text-muted small me-2 text-uppercase fw-semibold">Number</span>
+      <span class="badge bg-light text-primary border border-primary-subtle rounded-pill">
+        {{ playerDetail?.number}}
+      </span>
+      <span class="text-muted small ms-auto me-2 text-uppercase fw-semibold ">{{playerDetail?.position}}</span>
+    </div>
+
+    <a (click)="seeBio(playerDetail)" class="btn btn-primary w-100 rounded-pill fw-bold shadow-sm mt-auto">
+      See Bio
+    </a>
+  </div>
+</div>

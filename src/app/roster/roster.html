@@ -1,0 +1,61 @@
+<div class="container pb-5">
+
+<h2 class="text-center my-5 fw-bold d-flex align-items-center justify-content-center gap-2">
+  🏆 Dominican Roster
+  <img src="https://flagcdn.com/w40/do.png"
+       alt="Bandera RD"
+       width="30"
+       height="20"
+       class="shadow-sm border rounded-1 ms-2">
+</h2>
+
+  <div class="d-flex justify-content-center flex-wrap gap-2 mb-5">
+
+    <button class="btn btn-filter rounded-pill px-4"
+            [class.active]="positionFilter === 'All'"
+            (click)="filterByPosition('All')">
+      All Players
+    </button>
+
+    <button class="btn btn-filter rounded-pill px-4"
+            [class.active]="positionFilter === 'Pitcher'"
+            (click)="filterByPosition('Pitcher')">
+      ⚾ Pitchers
+    </button>
+
+    <button class="btn btn-filter rounded-pill px-4"
+            [class.active]="positionFilter === 'Outfielder'"
+            (click)="filterByPosition('Outfielder')">
+      🏃 Outfielders
+    </button>
+
+    <button class="btn btn-filter rounded-pill px-4"
+            [class.active]="positionFilter === 'Infielder'"
+            (click)="filterByPosition('Infielder')">
+      🧤 Infielders
+    </button>
+
+    <button class="btn btn-filter rounded-pill px-4"
+            [class.active]="positionFilter === 'Infielder'"
+            (click)="selectedTeam(805)">
+      🧤 Seleccionar equipo
+    </button>
+  </div>
+
+  <div class="row g-4">
+    @for (player of playersFiltered(); track $index) {
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+        <div class="card-hover h-100">
+           <app-card-component [playerDetail]="player" [isPriority]="$index < 4"></app-card-component>
+        </div>
+
+      </div>
+    }
+
+  </div>
+
+
+
+</div>

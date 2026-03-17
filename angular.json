@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "HALL_OF_FAME_APP": {
+    "wbc-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "HALL_OF_FAME_APP:build:production"
+              "buildTarget": "wbc-app:build:production"
             },
             "development": {
-              "buildTarget": "HALL_OF_FAME_APP:build:development"
+              "buildTarget": "wbc-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,5 +88,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
