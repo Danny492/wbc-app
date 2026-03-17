@@ -16,8 +16,6 @@ export class PlayerService {
   private urlLogoTeamBasePath = 'https://www.mlb.com/assets/images/teams/';
 
 
-  teams: string[] = [];
-
   //Mejorar esto para que de manera automatica podamos obtener los jugadores de Republica Dominicana
   // sin tener que estar actualizando los IDs manualmente
   //esto lo haremos con la api oficial de wbc
@@ -30,13 +28,17 @@ export class PlayerService {
   // Roster de todos los equipos, debemos agregarle el id del equipo para obtener el roster de cada equipo
   // https://statsapi.mlb.com/api/v1/teams/{teamID}/roster?season=2026
 
-  getTeams(){
-    this.http.get<any>('https://statsapi.mlb.com/api/v1/teams?sportId=51&leagueIds=160&season=2026')
-    .subscribe((response) => {
-      response.teams.forEach((team: any) => {
-        this.teams.push(team.id);
-      });
-    });
+  getTeams(): Observable<string[]> {
+    return this.http.get<any>('https://statsapi.mlb.com/api/v1/teams?sportId=51&leagueIds=160&season=2026')
+    .pipe(
+      map((response) => {
+        const teams: string[] = [];
+        response.teams.forEach((team: any) => {
+          teams.push(team.id);
+        });
+        return teams;
+      })
+    );
   }
 
   getPlayersById(teamId: number): Observable<string[]> {

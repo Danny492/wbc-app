@@ -19,7 +19,7 @@ export class Roster {
 
   playerIDs: string[] = [];
   teams: string[] = [];
-  selectedTeamVar:number = 0;
+  selectedTeamVar: number = 0;
 
   playersFiltered = computed(() => {
     const term = this.playerService.navbarData().toLowerCase();
@@ -29,26 +29,26 @@ export class Roster {
     }
 
     return this.players().filter((player) =>
-      (player.name + ' ' + player.lastName).toLowerCase().includes(term)
+      (player.name + ' ' + player.lastName).toLowerCase().includes(term),
     );
   });
 
   positionFilter: string = '';
 
   ngOnInit(): void {
-
-    // this.playerService.getTeams();
-    // this.teams = this.playerService.teams;
+    this.playerService.getTeams().subscribe((teams) => {
+      this.teams = teams;
+    });
   }
 
-  selectedTeam(teamId: number){
+  selectedTeam(teamId: number) {
     this.selectedTeamVar = teamId;
     this.playerService.getPlayersById(teamId).subscribe((playersId) => {
       this.playerIDs = playersId;
 
-        this.playerService.getPlayers(this.playerIDs).subscribe((players) => {
-      this.players.set(players);
-    });
+      this.playerService.getPlayers(this.playerIDs).subscribe((players) => {
+        this.players.set(players);
+      });
     });
   }
 
@@ -65,5 +65,3 @@ export class Roster {
     }
   }
 }
-
-
