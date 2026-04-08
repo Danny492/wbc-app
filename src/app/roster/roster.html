@@ -43,11 +43,11 @@
       🧤 Infielders
     </button>
 
-    <select class="form-select form-select-sm" aria-label="Small select example"
+    <select class="btn btn-filter rounded-pill px-4"
     [(ngModel)]="selectedTeamVar" (change)="selectedTeam()">
-      <option value="" disabled>🧤 Seleccionar equipo</option>
+      <option value="" disabled>🌍 Seleccionar equipo</option>
       @for (team of teams; track $index) {
-        <option [value]="team">{{ team }}</option>
+        <option [value]="team.id">{{ team.name }}</option>
       }
     </select>
   </div>

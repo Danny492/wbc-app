@@ -4,6 +4,7 @@ import { CardComponent } from '../card-component/card-component';
 import { Player } from '../Player';
 import { Layout } from '../layout/layout';
 import { FormsModule } from '@angular/forms';
+import { Team } from '../model/team';
 
 @Component({
   selector: 'app-roster',
@@ -19,7 +20,7 @@ export class Roster {
   // @Input() searchTerm: string = '';
 
   playerIDs: string[] = [];
-  teams: string[] = [];
+  teams: Team[] = [];
   selectedTeamVar: string = '';
 
   playersFiltered = computed(() => {
