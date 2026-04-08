@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Player } from './Player';
 import { map, Observable } from 'rxjs';
+import { Team } from './model/team';
 
 @Injectable({
   providedIn: 'root',
@@ -28,13 +29,16 @@ export class PlayerService {
   // Roster de todos los equipos, debemos agregarle el id del equipo para obtener el roster de cada equipo
   // https://statsapi.mlb.com/api/v1/teams/{teamID}/roster?season=2026
 
-  getTeams(): Observable<string[]> {
+  getTeams(): Observable<Team[]> {
     return this.http.get<any>('https://statsapi.mlb.com/api/v1/teams?sportId=51&leagueIds=160&season=2026')
     .pipe(
       map((response) => {
-        const teams: string[] = [];
+        const teams: Team[] = [];
         response.teams.forEach((team: any) => {
-          teams.push(team.id);
+          teams.push({
+            id: team.id,
+            name: team.name
+          });
         });
         return teams;
       })
