@@ -3,10 +3,11 @@ import { Component, computed, inject, Input, signal } from '@angular/core';
 import { CardComponent } from '../card-component/card-component';
 import { Player } from '../Player';
 import { Layout } from '../layout/layout';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-roster',
-  imports: [CardComponent],
+  imports: [CardComponent, FormsModule],
   templateUrl: './roster.html',
   styleUrl: './roster.css',
 })
@@ -19,7 +20,7 @@ export class Roster {
 
   playerIDs: string[] = [];
   teams: string[] = [];
-  selectedTeamVar: number = 0;
+  selectedTeamVar: string = '';
 
   playersFiltered = computed(() => {
     const term = this.playerService.navbarData().toLowerCase();
@@ -41,9 +42,8 @@ export class Roster {
     });
   }
 
-  selectedTeam(teamId: number) {
-    this.selectedTeamVar = teamId;
-    this.playerService.getPlayersById(teamId).subscribe((playersId) => {
+  selectedTeam() {
+    this.playerService.getPlayersById(this.selectedTeamVar).subscribe((playersId) => {
       this.playerIDs = playersId;
 
       this.playerService.getPlayers(this.playerIDs).subscribe((players) => {
@@ -57,7 +57,8 @@ export class Roster {
     this.positionFilter = arg0;
     if (this.positionFilter === 'All') {
       // this.ngOnInit();
-      this.selectedTeam(this.selectedTeamVar);
+      // this.selectedTeam(this.selectedTeamVar);
+      //  this.selectedTeam();
     } else {
       this.playerService.getPlayersByPosition(arg0, this.playerIDs).subscribe((players) => {
         this.players.set(players);
