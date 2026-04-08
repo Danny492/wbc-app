@@ -41,7 +41,7 @@ export class PlayerService {
     );
   }
 
-  getPlayersById(teamId: number): Observable<string[]> {
+  getPlayersById(teamId: string): Observable<string[]> {
     let players: string[] = [];
     return this.http.get<any>('https://statsapi.mlb.com/api/v1/teams/' + teamId + '/roster?season=2026')
     .pipe(
@@ -55,7 +55,6 @@ export class PlayerService {
   }
 
   getPlayers(playersId: string[]): Observable<Player[]> {
-    console.log('Player IDs for team:', playersId);
     return this.http
       .get<any>(this.apiBasePath + playersId + '&hydrate=currentTeam')
       .pipe(
