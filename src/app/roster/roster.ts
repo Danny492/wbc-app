@@ -1,8 +1,7 @@
 import { PlayerService } from './../player-service';
-import { Component, computed, inject, Input, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CardComponent } from '../card-component/card-component';
 import { Player } from '../Player';
-import { Layout } from '../layout/layout';
 import { FormsModule } from '@angular/forms';
 import { Team } from '../model/team';
 
@@ -16,9 +15,6 @@ export class Roster {
   playerService = inject(PlayerService);
 
   players = signal<Player[]>([]);
-  // playerFiltered: Player[] = [];
-  // @Input() searchTerm: string = '';
-
   playerIDs: string[] = [];
   teams: Team[] = [];
   selectedTeamVar: string = '';
@@ -53,13 +49,10 @@ export class Roster {
     });
   }
 
-  // Revisar el metodo de filtros
   filterByPosition(arg0: string) {
     this.positionFilter = arg0;
     if (this.positionFilter === 'All') {
-      // this.ngOnInit();
-      // this.selectedTeam(this.selectedTeamVar);
-      //  this.selectedTeam();
+       this.selectedTeam();
     } else {
       this.playerService.getPlayersByPosition(arg0, this.playerIDs).subscribe((players) => {
         this.players.set(players);
