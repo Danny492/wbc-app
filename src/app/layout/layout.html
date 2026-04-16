@@ -1,14 +1,13 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" (click)="roster()"
-      >Dominican Republic
+    <a class="navbar-brand" (click)="roster()" style="cursor: pointer">
       <img
-        src="https://flagcdn.com/w40/do.png"
-        alt="Bandera RD"
-        width="30"
-        height="20"
-        class="shadow-sm border rounded-1"
-    /></a>
+        src="assets/World_Baseball_Classic_logo.svg.png"
+        width="100"
+        style="height: auto"
+        alt="World Baseball Classic Logo"
+      />
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -30,9 +29,6 @@
             routerLinkActive="active"
             >Roster</a
           >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/entry']" routerLinkActive="active">Entry</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/entry']" routerLinkActive="active">Line-up</a>
